@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 
+const _API = process.env.API_URL
+
 const Home = () => {
   const [success, setSuccess] = useState(null);
   const [querys, setQuerys] = useState({});
@@ -19,7 +21,7 @@ const Home = () => {
     if (!Object.keys(querys)?.length) return;
 
     axios
-      .post("http://localhost:3000/auth/add-user", {
+      .post(`${_API}/add-user`, {
         oauth_token: querys.oauth_token,
         oauth_token_secret: querys.oauth_token_secret,
         user_id: querys.user_id,
@@ -38,7 +40,7 @@ const Home = () => {
       <div className="login h-100 flex-center">
         <a
           className="text-light text-decoration-none btn btn-success"
-          href="http://localhost:3000/auth/twitter"
+          href={`${_API}/twitter`}
         >
           login
         </a>

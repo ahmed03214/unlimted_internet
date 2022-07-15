@@ -7,6 +7,7 @@ const _API = process.env.API_URL
 
 const Home = () => {
   const [success, setSuccess] = useState(null);
+  const [error, setError] = useState(null);
   const [querys, setQuerys] = useState({});
   const { query } = useRouter();
 
@@ -27,7 +28,13 @@ const Home = () => {
         oauth_token_secret: querys.oauth_token_secret,
         user_id: querys.user_id,
       }) //
-      .then(() => setSuccess(true));
+      .then((data) => {
+        if(data.code === 200) {
+          return setSuccess(true);
+        };
+      
+        setError({ isError: true, message: data?.message || "unknown error" })
+      });
   }, [querys]);
 
   return (
@@ -40,6 +47,12 @@ const Home = () => {
       {success && (
         <p className="bg-success text-light d-block mx-auto mb-3 p-2 rounded w-fit">
           تم اضافة الحساب قم بأضافة حساب اخر
+        </p>
+      )}
+
+      {error?.isError && (
+        <p className="bg-success text-light d-block mx-auto mb-3 p-2 rounded w-fit">
+          {error.message}
         </p>
       )}
 

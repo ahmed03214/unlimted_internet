@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import axios from "axios";
 
 const Redirect = () => {
@@ -37,7 +38,15 @@ const Redirect = () => {
     }
   }, [tokens, handelResponse]);
 
-  return <div>Loading...</div>;
+  return (
+    <>
+     <Head>
+        <title>unlimted_internet</title>
+     </Head>
+  
+      <div>Loading...</div>
+    </>
+  )
 };
 
 export default Redirect;

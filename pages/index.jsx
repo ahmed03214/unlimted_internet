@@ -51,7 +51,7 @@ const Home = () => {
       )}
 
       {error?.isError && (
-        <p className="bg-success text-light d-block mx-auto mb-3 p-2 rounded w-fit">
+        <p className="bg-danger text-light d-block mx-auto mb-3 p-2 rounded w-fit">
           {error.message}
         </p>
       )}
